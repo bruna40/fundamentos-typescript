@@ -3,7 +3,7 @@ import { View } from "./View.js";
 
 export class NegociacoesView extends View<NegociacoesModel> {
 
-    template(model: NegociacoesModel): string {
+    protected template(model: NegociacoesModel): string {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -18,7 +18,7 @@ export class NegociacoesView extends View<NegociacoesModel> {
                 ${model.lista().map(negociacao => {
                     return `
                         <tr>
-                            <td>${negociacao.data.getDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
+                            <td>${this.formatar(negociacao.data)}</td>
                             <td>${negociacao.quantidade}</td>
                             <td>R$ ${negociacao.valor}</td>
                             <td>R$ ${negociacao.volume}</td>
@@ -28,6 +28,10 @@ export class NegociacoesView extends View<NegociacoesModel> {
             </tbody>
         </table>
         `;
+    }
+
+    private formatar(data: Date): string {
+        return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
     }
 
 }
