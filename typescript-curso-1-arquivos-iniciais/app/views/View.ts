@@ -1,3 +1,5 @@
+import { logarTempoDeExecucao } from "../decorators/logarTempoDeExecucao.js";
+
 export abstract class View<T> {
     protected element: HTMLElement;
     private escapar: boolean = false;

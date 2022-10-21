@@ -1,3 +1,4 @@
+import { logarTempoDeExecucao } from "../decorators/logarTempoDeExecucao.js";
 import { DiaDaSemana } from "../enums/Days.js";
 import { NegociacaoModel } from "../models/negociacaoModel.js";
 import { NegociacoesModel } from "../models/negociacoesModel.js";
@@ -11,8 +12,6 @@ export class NegociacaoController {
     private negociacoes = new NegociacoesModel();
     private negociacoesView = new NegociacoesView('#negociacoesView',true);
     private mensagemView = new MensagemView('#mensagemView');
-    private readonly SABADO = 6;
-    private readonly DOMINGO = 0;
 
     constructor() {
         this.inputData = document.querySelector('#data') as HTMLInputElement;
@@ -20,6 +19,8 @@ export class NegociacaoController {
         this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     }
+
+    @logarTempoDeExecucao()
 
     public adiciona():void {
         const negociacao = NegociacaoModel.criaDe(
